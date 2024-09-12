@@ -1,0 +1,45 @@
+<form id="myForm">
+    <input type="text" id="name" required minlength="3" placeholder="Name">
+    <input type="email" id="email" required placeholder="Email">
+    <input type="submit" value="Submit">
+  </form>
+  <p id="error"></p>
+
+  
+
+
+
+
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  #error {
+    color: red;
+    font-size: 0.9rem;
+  }
+
+  
+
+  document.getElementById('myForm').addEventListener('submit', function(event) {
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+    let error = document.getElementById('error');
+    
+    error.textContent = ''; // Clear previous errors
+    
+    if (name.length < 3) {
+      error.textContent = 'Name must be at least 3 characters long.';
+      event.preventDefault();
+    } else if (!validateEmail(email)) {
+      error.textContent = 'Please enter a valid email address.';
+      event.preventDefault();
+    }
+  });
+  
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  }
+  
